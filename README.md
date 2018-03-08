@@ -2,4 +2,4 @@
 
 Random python practice examples.
 
-Interested in playing the Boogle game? Check out dhungel_boggle.py 
+Interested in playing the Boggle game? Check out dhungel_boggle.py 
