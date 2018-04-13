@@ -1,0 +1,19 @@
+******************************************************************* 
+Calling Function factorial 
+Arguments:  
+7 of type int 
+Output:  
+5040
+Time of execution: 1.000618 s. 
+Return value: 5040 of type int 
+******************************************************************* 
+******************************************************************* 
+Calling Function square_sum 
+Arguments:  
+3 of type int 
+4 of type int 
+Output:  
+12
+Time of execution: 1.000101 s. 
+Return value: 12 of type int 
+******************************************************************* 
