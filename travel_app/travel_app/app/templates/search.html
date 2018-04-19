@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+{% block content %} 
+<h3>{{title}}</h3> 
+<form action="" method="post" name="country_search"> 
+  {{form.hidden_tag()}}
+  <p> Please enter the country you’d like to find information for:    
+    {{form.country_name(size=30)}}
+  </p>
+  <input type="submit" value="Search!">
+</form>
+
+{% if info %}
+<br/>
+<dl class="dl-horizontal">
+  <dt>Capital</dt> 
+  <dd>{{ info['Capital'] }}</dd>
+  <dt>Languages</dt>
+  <dd>{{ info['Languages'] }}</dd>
+  <dt>Currency</dt> 
+  <dd>{{info['Exchange rates'] }}</dd>
+  <dt>Population</dt>
+  <dd>{{ info['Population'] }}</dd>
+  <dt>Area</dt> 
+  <dd>{{ info['Area'] }}</dd>
+
+{% endif %}
+
+
+{% endblock %} 
