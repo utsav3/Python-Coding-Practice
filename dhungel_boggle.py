@@ -88,6 +88,7 @@ def gridGen(dice_faces):
 
 def calc_points(in_grids, input_words):
         points = 0
+        print(in_grids)
         for j in range(0, len(input_words)):
             if find_word(input_words[j], in_grids):
                     if len(input_words[j]) == 3 or len(input_words[j]) == 4:
