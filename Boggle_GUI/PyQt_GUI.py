@@ -11,6 +11,7 @@ from PyQt5.QtCore import pyqtSlot
 import random
 import itertools
 import os
+import shelve
 
 
 
@@ -35,6 +36,15 @@ class boggle_window(QtWidgets.QMainWindow):
         file_menu = menu_bar.addMenu('File')
         file_menu.addAction(exit_action)
         
+        
+        #OPEN AND SAVE FILE ACTION
+        openFile = QtWidgets.QAction("Open File", self)
+        openFile.triggered.connect(self.file_open)
+        saveFile = QtWidgets.QAction("Save File", self)
+        saveFile.triggered.connect(self.file_save)
+        file_menu.addAction(openFile)
+        file_menu.addAction(saveFile)
+        
         self.show()
         
     def closeEvent(self, event):
@@ -43,7 +53,17 @@ class boggle_window(QtWidgets.QMainWindow):
             event.accept()
         else:
             event.ignore()
-
+            
+    def file_open(self):
+        name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File')
+        file = open(name,'r')
+            
+    def file_save(self):
+        file = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File',"./","All file(*)" )
+        if file:
+            with open(file,"w") as save_data:
+                save_data.write(repr(DATA))
+        
 class boggleGame(QtWidgets.QWidget):
     list_of_words = []
     grid_2d_list = []
@@ -97,8 +117,11 @@ class boggleGame(QtWidgets.QWidget):
         
         
         #LIST BOX
+        self.listbox_label = QLabel(self)
+        self.listbox_label.setText("Entered Words::")
+        self.listbox_label.move(500,10)
         self.word_listbox = QListWidget(self)
-        self.word_listbox.move(500,10)
+        self.word_listbox.move(500,40)
         self.word_listbox.resize(280,280)
         self.word_listbox.addItem(self.textbox.text())
 
@@ -107,6 +130,7 @@ class boggleGame(QtWidgets.QWidget):
         
     def add_onClick(self):   
         word = self.textbox.text()
+        word = word.lower()
         if not word:
             return
         self.textbox.clear()
@@ -131,9 +155,7 @@ class boggleGame(QtWidgets.QWidget):
 
         
 def restart_program():
-    """Restarts the current program.
-    Note: this function does not return. Any cleanup action (like
-    saving data) must be done before calling this function."""
+    """Restarts the current program."""
     python = sys.executable
     os.execl(python, python, * sys.argv)        
         
